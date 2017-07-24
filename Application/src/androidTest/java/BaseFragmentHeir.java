@@ -6,10 +6,6 @@ import com.gsma.mobileconnect.r2.MobileConnectStatus;
 import com.gsma.mobileconnect.r2.android.demo.fragments.BaseAuthFragment;
 import com.gsma.mobileconnect.r2.discovery.DiscoveryResponse;
 
-/**
- * Created by e.dima on 19.7.17.
- */
-
 public class BaseFragmentHeir extends BaseAuthFragment {
 
     public void handleRedirect(MobileConnectStatus status) {
