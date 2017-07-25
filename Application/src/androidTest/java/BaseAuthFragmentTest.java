@@ -19,6 +19,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
@@ -111,6 +112,35 @@ public class BaseAuthFragmentTest {
                 this.notify();
             }
         }        });
+    }
+
+    @Test
+    public synchronized void handleRedirect() throws Exception{
+        mActivityRule.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                synchronized(this) {
+                    BaseFragmentHeir heir = spy(BaseFragmentHeir.class);
+                    doNothing().when(heir).handleRedirect(mockStatus);
+                    heir.handleRedirect(mockStatus);
+                    doReturn(MobileConnectStatus.ResponseType.ERROR).
+                            when(mockStatus).getResponseType();
+                    verify(heir).handleRedirect(mockStatus);
+                    doReturn(MobileConnectStatus.ResponseType.OPERATOR_SELECTION).
+                            when(mockStatus).getResponseType();
+                    verify(heir).handleRedirect(mockStatus);
+                    doReturn(MobileConnectStatus.ResponseType.START_AUTHENTICATION).
+                            when(mockStatus).getResponseType();
+                    verify(heir).handleRedirect(mockStatus);
+                    doReturn(MobileConnectStatus.ResponseType.AUTHENTICATION).
+                            when(mockStatus).getResponseType();
+                    verify(heir).handleRedirect(mockStatus);
+                    doReturn(MobileConnectStatus.ResponseType.COMPLETE).
+                            when(mockStatus).getResponseType();
+                    verify(heir).handleRedirect(mockStatus);
+                    this.notify();
+                }
+            }        });
     }
 
     @Test
