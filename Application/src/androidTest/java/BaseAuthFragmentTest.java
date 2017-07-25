@@ -10,6 +10,7 @@ import com.gsma.mobileconnect.r2.android.main.MobileConnectAndroidView;
 import com.gsma.mobileconnect.r2.discovery.DiscoveryResponse;
 import com.gsma.mobileconnect.r2.discovery.OperatorUrls;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -23,6 +24,7 @@ import static org.mockito.Mockito.verify;
 
 @RunWith(AndroidJUnit4.class)
 public class BaseAuthFragmentTest {
+
     @Mock
     private MobileConnectAndroidView mockAndroidView =
             Mockito.mock(MobileConnectAndroidView.class);
@@ -62,6 +64,7 @@ public class BaseAuthFragmentTest {
                 heir.connectMobileWithoutDiscovery();
                 verify(heir).connectMobileWithoutDiscovery();
                 this.notify();
+                Assert.assertNotNull(BaseFragmentHeir.mobileConnectAndroidView);
             }
         }        });
     }
@@ -75,6 +78,7 @@ public class BaseAuthFragmentTest {
                 heir.connectMobileDemo();
                 verify(heir).connectMobileDemo();
                 this.notify();
+                Assert.assertNotNull(BaseFragmentHeir.mobileConnectAndroidView);
             }
         }        });
     }
