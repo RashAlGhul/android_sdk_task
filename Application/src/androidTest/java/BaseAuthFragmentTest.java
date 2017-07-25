@@ -53,7 +53,9 @@ public class BaseAuthFragmentTest {
 
     @Test
     public synchronized void connectMobileWithoutDiscovery() throws Exception {
-        mActivityRule.getActivity().runOnUiThread(new Runnable() {            @Override            public void run() {
+        mActivityRule.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
             synchronized(this) {
                 BaseFragmentHeir heir = spy(BaseFragmentHeir.class);
                 doNothing().when(heir).connectMobileWithoutDiscovery();
@@ -173,8 +175,18 @@ public class BaseAuthFragmentTest {
 
     @Test
     public synchronized void onDiscoveryResponse() throws Exception {
-        //heir.onDiscoveryResponse(discoveryFailed(mockStatus);
-        verify(mockStatus).getResponseType();
+        mActivityRule.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                synchronized(this) {
+                    BaseFragmentHeir heir = spy(BaseFragmentHeir.class);
+                    doNothing().when(heir).onDiscoveryResponse(mockStatus);
+                    heir.onDiscoveryResponse(mockStatus);
+                    verify(heir).onDiscoveryResponse(mockStatus);
+                    this.notify();
+                }
+            }
+        });
     }
 
     @Test
